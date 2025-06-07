@@ -1,43 +1,39 @@
 package com.bapsdelhibalmandal.balbalika_management_system.model;
 
-import jakarta.persistence.Entity;
-import lombok.Builder;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Attendance {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long attendanceId;
 
     @DateTimeFormat(pattern = "ddMMyyyy")
     private LocalDate attendanceDate;
 
-    public Long getAttendanceId() {
-        return attendanceId;
-    }
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    public void setAttendanceId(Long attendanceId) {
-        this.attendanceId = attendanceId;
-    }
+    public enum Status{
+        PRESENT, ABSENT
 
-    public LocalDate getAttendanceDate() {
-        return attendanceDate;
-    }
-
-    public void setAttendanceDate(LocalDate attendanceDate) {
-        this.attendanceDate = attendanceDate;
-    }
-
-    public Attendance() {
-    }
-
-    public Attendance(Long attendanceId, LocalDate attendanceDate) {
-        this.attendanceId = attendanceId;
-        this.attendanceDate = attendanceDate;
     }
 
 
+    @ManyToOne
+    @JoinColumn(name = "kidId")
+    private Kid kid;
 }
+
+
+

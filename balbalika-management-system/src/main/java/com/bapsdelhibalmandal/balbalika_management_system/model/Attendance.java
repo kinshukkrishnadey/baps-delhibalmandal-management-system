@@ -22,9 +22,9 @@ public class Attendance {
     private LocalDate attendanceDate;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private AttendanceStatus status;
 
-    public enum Status{
+    public enum AttendanceStatus{
         PRESENT, ABSENT
 
     }
